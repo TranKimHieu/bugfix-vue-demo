@@ -40,7 +40,7 @@
             <el-menu-item index="6">
               <el-icon><img src="./assets/message.svg"></el-icon>
               <span>Messages</span>
-              <el-tag class="ml-2" type="danger">49</el-tag>
+              <el-tag class="message-count ml-2" type="danger">49</el-tag>
             </el-menu-item>
             <el-menu-item index="7">
               <el-icon><img src="./assets/notification.svg"></el-icon>
@@ -50,12 +50,8 @@
               <el-icon><img src="./assets/settings.svg"></el-icon>
               <span>Settings</span>
             </el-menu-item>
-            <el-col>
-              <img alt="object" src="./assets/object.png">
-            </el-col>
-            <el-col>
-              <img alt="vector" src="./assets/Vector 8.svg">
-            </el-col>
+            <p class="illustration"><img alt="object" class="object" src="./assets/object.png"></p>
+            <p class="illustration"><img alt="vector" src="./assets/Vector 8.svg"></p>
             <el-button type="primary">Upgrade Now</el-button>
             <el-row>
               <el-icon><img src="./assets/Rectangle 115.png"></el-icon>
@@ -100,11 +96,47 @@
           <el-table-column prop="name" label="Name" width="180" />
           <el-table-column prop="email" label="Email" />
           <el-table-column prop="phonenumber" label="Phone number" />
-          <el-table-column prop="gender" label="Gender" />
+          <el-table-column prop="gender" label="Gender" >
+            <template #default="scope">
+              <el-tag 
+              class="mx-1" 
+              effect="light" 
+              round
+              :type="scope.row.gender === 'Male' ? '' : 'warning'"
+              >{{ scope.row.gender }}</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column fixed="right" width="120">
             <template #default>
-              <el-button link type="primary" size="small">Detail</el-button>
-              <el-button link type="primary" size="small">Edit</el-button>
+              <el-dropdown>
+                <span class="el-dropdown-link">
+                  ...
+                </span>
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item>
+                      <el-button size="small" type="primary" plain @click="dialogFormVisible2 = true">Edit</el-button>
+                      <!-- <el-dialog v-model="dialogFormVisible2" title="Edit Customer">
+                        <el-form>
+                          <el-form-item>
+                            <el-input autocomplete="off" placeholder="John Deo"/>
+                          </el-form-item>
+                          
+                        </el-form>
+                        <template #footer>
+                          <span class="dialog-footer">
+                            <el-button @click="dialogFormVisible2 = false">Close</el-button>
+                            <el-button type="primary" @click="dialogFormVisible2 = false">
+                              Save
+                            </el-button>
+                          </span>
+                        </template>
+                      </el-dialog> -->
+                    </el-dropdown-item>
+                    <el-dropdown-item><el-button size="small" type="danger" plain>Delete</el-button></el-dropdown-item>
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
@@ -121,25 +153,18 @@
     </el-aside>
   </el-container>
 
-  <!-- <el-scrollbar max-height="900px" width="218px">
-    <p v-for="item in 8" :key="item" class="scrollbar-demo-item">{{ item }}</p>
-    <p class="scrollbar-demo-item"><img alt="object" class="object" src="./assets/object.png"></p>
-    <p class="scrollbar-demo-item"><img alt="vector" src="./assets/Vector 8.svg"></p>
-    <p class="scrollbar-demo-item"><el-button type="primary">Upgrade Now</el-button></p>
-  </el-scrollbar> -->
-
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
-  <router-view/>
+  <router-view/> -->
 </template>
 
 <script setup>
 import { reactive, ref } from 'vue'
 
-const dialogTableVisible = ref(false)
 const dialogFormVisible = ref(false)
+const dialogFormVisible2 = ref(false)
 const formLabelWidth = '140px'
 
 const form = reactive({
@@ -153,6 +178,7 @@ const form = reactive({
   desc: '',
 })
 
+
 const tableData = [
   {
     name: 'John Deo',
@@ -161,8 +187,62 @@ const tableData = [
     gender: 'Male'
   },
   {
-    name: 'John Deo',
-    email: 'johndoe2211@gmail.com',
+    name: 'Shelby Goode',
+    email: 'shelbygoode481@gmail.com',
+    phonenumber: '+33757005467',
+    gender: 'Female'
+  },
+  {
+    name: 'Robert Bacins',
+    email: 'robertbacins4182@.com',
+    phonenumber: '+33757005467',
+    gender: 'Male'
+  },
+  {
+    name: 'John Carilo',
+    email: 'john carilo182@.com',
+    phonenumber: '+33757005467',
+    gender: 'Male'
+  },
+  {
+    name: 'Adriene Watson',
+    email: 'adrienewatson82@.com',
+    phonenumber: '+83757305467',
+    gender: 'Female'
+  },
+  {
+    name: 'Jhon Deo',
+    email: 'jhondeo24823@.com',
+    phonenumber: '+63475700546',
+    gender: 'Male'
+  },
+  {
+    name: 'Mark Ruffalo',
+    email: 'markruffalo3735@.com',
+    phonenumber: '+33757005467',
+    gender: 'Male'
+  },
+  {
+    name: 'Bethany Jackson',
+    email: 'bethanyjackson5@.com',
+    phonenumber: '+33757005467',
+    gender: 'Female'
+  },
+  {
+    name: 'Christine Huston',
+    email: 'christinehuston4@.com',
+    phonenumber: '+33757005467',
+    gender: 'Male'
+  },
+  {
+    name: 'Anne Jacob',
+    email: 'annejacob2@ummoh.com',
+    phonenumber: '+33757005467',
+    gender: 'Male'
+  },
+  {
+    name: 'James Mullican',
+    email: 'jamesmullican5346@.com',
     phonenumber: '+33757005467',
     gender: 'Male'
   },
@@ -203,5 +283,24 @@ table {
   border-collapse: separate; 
   border-spacing: 0 10px;
   background-color: #F7F7F8;
+}
+
+.illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.message-count {
+  margin-left: 37px;
+}
+
+.example-showcase .el-dropdown-link {
+  display: flex;
+  align-items: center;
 }
 </style>
