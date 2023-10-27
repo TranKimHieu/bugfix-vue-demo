@@ -115,23 +115,7 @@
                 <template #dropdown>
                   <el-dropdown-menu>
                     <el-dropdown-item>
-                      <el-button size="small" type="primary" plain @click="dialogFormVisible2 = true">Edit</el-button>
-                      <!-- <el-dialog v-model="dialogFormVisible2" title="Edit Customer">
-                        <el-form>
-                          <el-form-item>
-                            <el-input autocomplete="off" placeholder="John Deo"/>
-                          </el-form-item>
-                          
-                        </el-form>
-                        <template #footer>
-                          <span class="dialog-footer">
-                            <el-button @click="dialogFormVisible2 = false">Close</el-button>
-                            <el-button type="primary" @click="dialogFormVisible2 = false">
-                              Save
-                            </el-button>
-                          </span>
-                        </template>
-                      </el-dialog> -->
+                      <el-button size="small" type="primary" plain @click="toggle(true)">Edit</el-button>
                     </el-dropdown-item>
                     <el-dropdown-item><el-button size="small" type="danger" plain>Delete</el-button></el-dropdown-item>
                   </el-dropdown-menu>
@@ -151,6 +135,24 @@
       <el-progress type="circle" :percentage="70" />
       <el-progress type="circle" :percentage="60" />
     </el-aside>
+
+    <el-dialog v-model="dialogFormVisible2" title="Edit Customer">
+      <el-form>
+        <el-form-item>
+          <el-input autocomplete="off" placeholder="John Deo"/>
+        </el-form-item>
+
+      </el-form>
+      <template #footer>
+                          <span class="dialog-footer">
+                            <el-button @click="toggle(false)">Close</el-button>
+                            <el-button type="primary" @click="toggle(false)">
+                              Save
+                            </el-button>
+                          </span>
+      </template>
+    </el-dialog>
+
   </el-container>
 
   <!-- <nav>
@@ -178,6 +180,9 @@ const form = reactive({
   desc: '',
 })
 
+const toggle = (status) => {
+  dialogFormVisible2.value = status
+}
 
 const tableData = [
   {
